@@ -1024,6 +1024,16 @@ const UI = {
         }
         url += '/' + path;
 
+        console.log('original url', url, window.location.pathname);
+
+        const noVNCIndexRegexp = /^\/novnc\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})\/index$/
+        const noVNCIndexMatches = window.location.pathname.match(noVNCIndexRegexp);
+        if (noVNCIndexMatches) {
+            const capturerUUID = noVNCIndexMatches[1];
+            url = `ws://capturer-relay-${capturerUUID}:6080/websockify`;
+            console.log('url rewrite', url)
+        }
+
         UI.rfb = new RFB(document.getElementById('noVNC_container'), url,
                          { shared: UI.getSetting('shared'),
                            repeaterID: UI.getSetting('repeaterID'),
