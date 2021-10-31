@@ -1030,7 +1030,8 @@ const UI = {
         const noVNCIndexMatches = window.location.pathname.match(noVNCIndexRegexp);
         if (noVNCIndexMatches) {
             const capturerUUID = noVNCIndexMatches[1];
-            url = `wss://capturer-relay-${capturerUUID}.capturer-relay-service.playback.svc.cluster.local:6080/websockify`
+            // url = `wss://capturer-relay-${capturerUUID}.capturer-relay-service.playback.svc.cluster.local:6080/websockify`
+            url = `wss://remote.getplayback.dev/novnc/${capturerUUID}/websockify`
             console.log('url rewrite', url)
         }
 
