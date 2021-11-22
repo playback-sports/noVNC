@@ -40,6 +40,7 @@ const UI = {
     inhibitReconnect: true,
     reconnectCallback: null,
     reconnectPassword: null,
+    wsHostName: process.env.PROD ? 'remote.getplayback.com' :  'remote.getplayback.dev',
 
     prime() {
         return WebUtil.initSettings().then(() => {
@@ -1031,7 +1032,7 @@ const UI = {
         if (noVNCIndexMatches) {
             const capturerUUID = noVNCIndexMatches[1];
             // url = `wss://capturer-relay-${capturerUUID}.capturer-relay-service.playback.svc.cluster.local:6080/websockify`
-            url = `wss://remote.getplayback.dev/novnc/${capturerUUID}/websockify`
+            url = `wss://${UI.wsHostName}/novnc/${capturerUUID}/websockify`
             console.log('url rewrite', url)
         }
 
