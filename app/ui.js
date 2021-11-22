@@ -40,7 +40,7 @@ const UI = {
     inhibitReconnect: true,
     reconnectCallback: null,
     reconnectPassword: null,
-    wsHostName: process.env.PROD ? 'remote.getplayback.com' :  'remote.getplayback.dev',
+    wsHostName: process.env.WS_HOSTNAME,
 
     prime() {
         return WebUtil.initSettings().then(() => {
