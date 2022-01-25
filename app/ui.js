@@ -1029,8 +1029,7 @@ const UI = {
         const noVNCUUIDRegexp = /^\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})\/{0,1}$/
         const noVNCUUIDMatches = window.location.pathname.match(noVNCUUIDRegexp);
         if (noVNCUUIDMatches) {
-            const uuid = noVNCIndexMatches[1];
-            // url = `wss://capturer-relay-${capturerUUID}.capturer-relay-service.playback.svc.cluster.local:6080/websockify`
+            const uuid = noVNCUUIDMatches[1];
             url = `wss://${location.hostname}/${uuid}/websockify`
             console.log('url rewrite', url)
         }
