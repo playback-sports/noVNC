@@ -1024,6 +1024,17 @@ const UI = {
         }
         url += '/' + path;
 
+        console.log('original url', url, window.location.pathname);
+
+        const noVNCUUIDRegexp = /^\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})\/{0,1}$/
+        const noVNCUUIDMatches = window.location.pathname.match(noVNCUUIDRegexp);
+        if (noVNCUUIDMatches) {
+            const uuid = noVNCIndexMatches[1];
+            // url = `wss://capturer-relay-${capturerUUID}.capturer-relay-service.playback.svc.cluster.local:6080/websockify`
+            url = `wss://${location.hostname}/${uuid}/websockify`
+            console.log('url rewrite', url)
+        }
+
         UI.rfb = new RFB(document.getElementById('noVNC_container'), url,
                          { shared: UI.getSetting('shared'),
                            repeaterID: UI.getSetting('repeaterID'),
