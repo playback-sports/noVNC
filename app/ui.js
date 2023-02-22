@@ -398,6 +398,9 @@ const UI = {
     document
       .getElementById("noVNC_clipboard_clear_button")
       .addEventListener("click", UI.clipboardClear);
+    document
+      .getElementById("paste-btn")
+      .addEventListener("click", UI.clipboardSendV2);
   },
 
   // Add a call to save settings when the element changes,
@@ -1063,6 +1066,14 @@ const UI = {
     Log.Debug(">> UI.clipboardSend: " + text.substr(0, 40) + "...");
     UI.rfb.clipboardPasteFrom(text);
     Log.Debug("<< UI.clipboardSend");
+  },
+
+  clipboardSendV2() {
+    window.navigator.clipboard.readText().then((text) => {
+      Log.Debug(">> UI.clipboardSendV2: " + text.substr(0, 40) + "...");
+      UI.rfb.clipboardPasteFrom(text);
+      Log.Debug("<< UI.clipboardSendV2");
+    });
   },
 
   /* ------^-------
