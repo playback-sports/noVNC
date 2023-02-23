@@ -1074,6 +1074,7 @@ const UI = {
       text.split("").forEach((key) => {
         UI.rfb.sendKey(toUnicode(key), key.charCodeAt(0));
       });
+      UI.rfb.focus();
       Log.Debug("<< UI.clipboardSendV2");
     });
   },
