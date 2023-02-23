@@ -1137,12 +1137,12 @@ const UI = {
     console.log("original url", url, window.location.pathname);
 
     const noVNCIndexRegexp =
-      /^\/novnc\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})\/index$/;
+      /^\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$/;
     const noVNCIndexMatches = window.location.pathname.match(noVNCIndexRegexp);
     if (noVNCIndexMatches) {
       const capturerUUID = noVNCIndexMatches[1];
       // url = `wss://capturer-relay-${capturerUUID}.capturer-relay-service.playback.svc.cluster.local:6080/websockify`
-      url = `wss://${location.hostname}/novnc/${capturerUUID}/websockify`;
+      url = `wss://${location.hostname}/${capturerUUID}/websockify`;
       console.log("url rewrite", url);
     }
 
