@@ -1071,7 +1071,9 @@ const UI = {
   clipboardSendV2() {
     window.navigator.clipboard.readText().then((text) => {
       Log.Debug(">> UI.clipboardSendV2: " + text.substr(0, 40) + "...");
-      UI.rfb.clipboardPasteFrom(text);
+      text.split("").forEach((key) => {
+        UI.rfb.sendKey(toUnicode(key), key.charCodeAt(0));
+      });
       Log.Debug("<< UI.clipboardSendV2");
     });
   },
@@ -1883,6 +1885,10 @@ if (l10n.language === "en" || l10n.dictionary !== undefined) {
     })
     .catch((err) => Log.Error("Failed to load translations: " + err))
     .then(UI.prime);
+}
+
+function toUnicode(s) {
+  return "0x" + `0000${s.charCodeAt(0).toString(16)}`.slice(-4);
 }
 
 export default UI;
